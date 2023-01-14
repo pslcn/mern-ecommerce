@@ -1,4 +1,8 @@
+import React from 'react';
 import {useState} from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+
+import Navbar from './navbar/Navbar';
 
 const Product = (props) => {
 	const [quantity, setQuantity] = useState(0);
@@ -20,9 +24,15 @@ const Product = (props) => {
 const App = () => {
 	const loremipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a cursus lectus. Donec eget lectus id ipsum vulputate pharetra. Etiam vestibulum ex vehicula, commodo sem a, egestas felis. Aenean eu condimentum mauris. Donec ornare ante nec nibh molestie rutrum. Nunc interdum sagittis bibendum. Quisque ex purus, pellentesque eu est vitae, porta vestibulum metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat velit vel justo imperdiet, sed efficitur felis sodales. Cras iaculis sem purus, vel maximus quam cursus eget. Duis sed risus ac nunc laoreet consequat. Aenean suscipit orci nec finibus fermentum.';
 	return (
-		<div className="App">
+		<>
+			<Router>
+				<Navbar />
+				<Routes>
+					<Route path="/" exact/>
+				</Routes>
+			</Router>
 			<Product name={'Generic Product'} desc={loremipsum} price={'£10.99'}/>
-		</div>
+		</>
 	);
 }
 
