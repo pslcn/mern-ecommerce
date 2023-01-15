@@ -1,37 +1,36 @@
 import React from 'react';
-import {useState} from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './navbar/Navbar';
+import ProductView from './productview/ProductView';
 
-const Product = (props) => {
-	const [quantity, setQuantity] = useState(0);
-	const descmaxlen = 80;
+const SearchResultsPage = ({searchresults}) => {
 	return (
-		<div className="Product">
-			<h2>{props.name}</h2>
-			<p>{props.desc.length > descmaxlen ? 
-				props.desc.substring(0, descmaxlen - 3) + '...' : 
-				props.desc
-			}</p>
-			<p>{props.price}</p>
-			<button onClick={() => {alert('Item added to cart'); setQuantity((prevCount) => prevCount + 1)}}>Add to cart</button>
-			<p>Quantity: {quantity}</p>
-		</div>
+		<>
+			<div className='product-view'>
+				{
+					searchresults?.length > 0 
+						? (
+							<ProductView productdata={searchresults}/>
+						) : (
+							<h2>No products matched the query</h2>	
+						)
+				}
+			</div>
+		</>
 	)
 }
 
 const App = () => {
-	const loremipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a cursus lectus. Donec eget lectus id ipsum vulputate pharetra. Etiam vestibulum ex vehicula, commodo sem a, egestas felis. Aenean eu condimentum mauris. Donec ornare ante nec nibh molestie rutrum. Nunc interdum sagittis bibendum. Quisque ex purus, pellentesque eu est vitae, porta vestibulum metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat velit vel justo imperdiet, sed efficitur felis sodales. Cras iaculis sem purus, vel maximus quam cursus eget. Duis sed risus ac nunc laoreet consequat. Aenean suscipit orci nec finibus fermentum.';
 	return (
 		<>
 			<Router>
 				<Navbar />
 				<Routes>
-					<Route path="/" exact/>
+					<Route path="/" exact />
 				</Routes>
 			</Router>
-			<Product name={'Generic Product'} desc={loremipsum} price={'£10.99'}/>
 		</>
 	);
 }
