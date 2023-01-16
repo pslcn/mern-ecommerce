@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
 
 import Navbar from './navbar/Navbar';
 import ProductView from './productview/ProductView';
@@ -10,7 +10,7 @@ const SearchResultsPage = ({searchresults}) => {
 		<>
 			<div className='product-view'>
 				{
-					searchresults?.length > 0 
+					searchresults.length > 0 
 						? (
 							<ProductView productdata={searchresults}/>
 						) : (
@@ -22,17 +22,29 @@ const SearchResultsPage = ({searchresults}) => {
 	)
 }
 
-const App = () => {
+const HomePage = () => {
 	return (
 		<>
-			<Router>
-				<Navbar />
-				<Routes>
-					<Route path="/" exact />
-				</Routes>
-			</Router>
+			<Navbar />
 		</>
-	);
+	)
+}
+
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: (<HomePage />),
+	},
+	{
+		path: '/results',
+		element: (<SearchResultsPage />),
+	},
+]);
+
+const App = () => {
+	return (
+		<RouterProvider router={router} />
+	)
 }
 
 export default App;
