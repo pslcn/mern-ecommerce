@@ -1,0 +1,43 @@
+* {
+	text-decoration: none;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 1px solid #e7e7e7;
+	background-color: #f3f3f3;
+}
+
+li {
+	float: left;
+}
+
+.nav-listitem {
+	display: block;
+	color: #666;
+	text-align: center;
+	padding: 14px 16px;
+}
+
+.navbar-logo {
+	font-size: 32px;
+	text-align: center;
+	padding: 14px 16px;
+}
+
+.search-bar {
+	display: inline;
+	padding: 14px 16px;
+}
+
+.nav-logosection {
+	float: left;
+}
+
+.nav-menu {
+	font-size: 18px;
+	float: right;
+}

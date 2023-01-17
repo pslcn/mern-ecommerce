@@ -8,7 +8,7 @@ import './Navbar.css';
 const NavItem = (props) => {
 	return (
 		<>
-			<li className='nav-item'>
+			<li className='nav-listitem'>
 				<Link to={props.link} className='nav-links'>
 					{props.name}
 				</Link>
@@ -48,12 +48,17 @@ const Navbar = () => {
 		<>
 			<nav className="navbar">
 				<div className="navbar-container">
-					<Link to="/" className="navbar-logo">eCommerce Platform <FontAwesomeIcon icon="fa-solid fa-basket-shopping" /></Link>	
-					<SearchBar link={'/results'} />
-					<ul className='nav-menu'>
-						<NavItem name={'Home'} link={'/'} />	
-						<NavItem name={'About'} link={'/'} />	
-						<NavItem name={'Cart'} link={'/cart'} />	
+					<ul>
+						<div className="nav-logosection">
+							<Link to="/" className="navbar-logo">eCommerce Platform <FontAwesomeIcon icon="fa-solid fa-basket-shopping" /></Link>	
+							<SearchBar link={'/results'} />
+						</div>
+						
+						<div className="nav-menu">
+							<NavItem name={'Home'} link={'/'} />	
+							<NavItem name={'About'} link={'/'} />	
+							<NavItem name={'Cart'} link={'/cart'} />	
+						</div>
 					</ul>
 				</div>
 			</nav>
