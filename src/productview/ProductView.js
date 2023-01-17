@@ -4,11 +4,13 @@ import Product from './Product'
 
 const ProductView = ({productdata}) => {
 	return (
-		<div className='product-view'>
-			{productdata.map((product) => (
-				<Product props={product} />
-			))}
-		</div>
+		<>
+			<div className='product-view'>
+				{productdata.map((product) => (
+					<Product props={product} />
+				))}
+			</div>
+		</>
 	)
 }
 

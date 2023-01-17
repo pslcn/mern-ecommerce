@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
 
 import Navbar from './navbar/Navbar';
