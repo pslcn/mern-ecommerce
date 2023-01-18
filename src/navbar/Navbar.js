@@ -8,8 +8,8 @@ import './Navbar.css';
 const NavItem = (props) => {
 	return (
 		<>
-			<li className='nav-listitem'>
-				<Link to={props.link} className='nav-links'>
+			<li className='horiz-li'>
+				<Link to={props.link}>
 					{props.name}
 				</Link>
 			</li>
@@ -34,7 +34,7 @@ const SearchBar = ({link}) => {
 	}
 
 	return (
-		<form className='search-bar' onSubmit={handleSubmit} >
+		<form onSubmit={handleSubmit} >
 			<input type='text' placeholder='Search for products' 
 				value={searchTerm} 
 				onChange={(e) => setSearchTerm(e.target.value)} 
@@ -46,22 +46,25 @@ const SearchBar = ({link}) => {
 const Navbar = () => {
 	return (
 		<>
-			<nav className="navbar">
-				<div className="navbar-container">
-					<ul>
-						<div className="nav-logosection">
-							<Link to="/" className="navbar-logo">eCommerce Platform <FontAwesomeIcon icon="fa-solid fa-basket-shopping" /></Link>	
-							<SearchBar link={'/results'} />
-						</div>
-						
-						<div className="nav-menu">
+			<header className='header-container flex-container container'>
+				<div className='header-text flex-item-container container'>
+					<Link to="/" className="navbar-logo">eCommerce Platform <FontAwesomeIcon icon="fa-solid fa-basket-shopping" /></Link>	
+				</div>			
+				
+				<nav className='header-nav flex-container container'>
+					<div className='nav-form flex-item-container container'>
+						<SearchBar link={'/results'} />
+					</div>
+
+					<div className='nav-list flex-item-container container'>
+						<ul>
 							<NavItem name={'Home'} link={'/'} />	
 							<NavItem name={'About'} link={'/'} />	
 							<NavItem name={'Cart'} link={'/cart'} />	
-						</div>
-					</ul>
-				</div>
-			</nav>
+						</ul>
+					</div>
+				</nav>
+			</header>
 		</>
 	);
 }
