@@ -23,10 +23,13 @@ const SearchBar = ({link}) => {
 
 	const navigate = useNavigate();
 
+	const API_URL = 'http://localhost:8080/api';
+
 	const searchProducts = async (productname) => {
-		const data = await fetch('http://localhost:8080/api');
-		const products = data.json();
-		setProducts(products);
+		const response = await fetch(`${API_URL}&s={productname}`);
+		const data = await response.json();
+
+		setProducts(data.Search);
 	}
 
 	const handleSubmit = (event) => {
