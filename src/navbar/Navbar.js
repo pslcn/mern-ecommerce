@@ -24,7 +24,9 @@ const SearchBar = ({link}) => {
 	const navigate = useNavigate();
 
 	const searchProducts = async (productname) => {
-		setProducts();
+		const data = await fetch('http://localhost:8080/api');
+		const products = data.json();
+		setProducts(products);
 	}
 
 	const handleSubmit = (event) => {
@@ -48,7 +50,7 @@ const Navbar = () => {
 		<>
 			<header className='header-container flex-container container'>
 				<div className='header-text flex-item-container container'>
-					<Link to="/" className="navbar-logo">eCommerce Platform <FontAwesomeIcon icon="fa-solid fa-basket-shopping" /></Link>	
+					<Link to="/" className="navbar-logo">eCommerce Platform <FontAwesomeIcon icon="fas fa-basket-shopping" /></Link>	
 				</div>			
 				
 				<nav className='header-nav flex-container container'>
