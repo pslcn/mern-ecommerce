@@ -2,7 +2,7 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider, useLocation } from 'react-router-dom';
 
 import Navbar from './navbar/Navbar';
-import ProductView from './productview/ProductView';
+import ProductListView from './productview/ProductView';
 
 import './App.css';
 
@@ -27,7 +27,8 @@ const SearchResultsPage = () => {
 
 	return (
 		<>
-			<ProductView productData={ searchResults } maxNumShow={6} />
+			<Navbar />
+			<ProductListView productData={ searchResults } maxNumShow={6} />
 		</>
 	)
 }

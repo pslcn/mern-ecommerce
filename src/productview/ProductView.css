@@ -1,0 +1,32 @@
+.container {
+	padding: 5px;
+}
+
+.flex-generic-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.flex-item-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.content-container {
+	background-color: #f3f3f3;
+}
+
+.content-section {
+	width: 90%;
+	margin: auto;
+}
+
+.product-article {
+	margin: 5px;
+}
+
+.product-container {
+	padding: 10px;
+	background-color: #94d6f2;
+}
