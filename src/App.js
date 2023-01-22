@@ -1,24 +1,33 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useLocation } from 'react-router-dom';
 
 import Navbar from './navbar/Navbar';
 import ProductView from './productview/ProductView';
 
 import './App.css';
 
-const SearchResultsPage = ({searchresults}) => {
+const SearchResultsPage = () => {
+	const { search } = useLocation();
+	const parameters = new URLSearchParams(search);
+
+	const API_URL = 'http://localhost:8080/api';
+	const getSearchResults = async (searchQuery) => {
+		console.log('Search Query: ' + searchQuery);
+		// const response = await fetch(`${API_URL}&s=${searchQuery}`);
+		const response = await fetch(`${API_URL}`);
+		const data = await response.json();
+
+		return data.fetchedData
+	}
+
+	const searchQuery = parameters.get('search_query');
+
+	const searchResults = getSearchResults(searchQuery);
+	// searchResults.then((test) => (console.log('searchResults: ' + test[0].name)));
+
 	return (
 		<>
-			<div className='product-view'>
-				{
-					searchresults.length > 0 
-						? (
-							<ProductView productdata={searchresults}/>
-						) : (
-							<h2>No products matched the query</h2>	
-						)
-				}
-			</div>
+			<ProductView productData={ searchResults } />
 		</>
 	)
 }
@@ -43,17 +52,8 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-	// const [serverResponse, setServerResponse] = useState('');
-
-	// const getServerResponse = () => {
-	// 	fetch('http://localhost:9000/')
-	// 		.then(res = res.text())
-	// 		.then(res => {serverResponse = res})
-	// 		.catch(res => err);
-	// }
-
 	return (
-		<RouterProvider router={router} />
+		<RouterProvider router={ router } />
 	)
 }
 

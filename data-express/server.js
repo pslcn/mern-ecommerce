@@ -1,4 +1,4 @@
-require('dotenv').config({path:__dirname+'/./../.env'});
+require('dotenv').config({ path:__dirname+'/./../.env' });
 
 const express = require('express');
 const cors = require('cors');
@@ -6,8 +6,9 @@ const cors = require('cors');
 const { MongoClient } = require('mongodb');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 async function createDummyDocuments(collection) {
 	const dummyProducts = [];
@@ -16,6 +17,7 @@ async function createDummyDocuments(collection) {
 			name: 'Generic Product',
 			desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis est libero, mattis sed dolor nec, ultricies rhoncus orci.',
 			price: '£29.99',
+			productid: i,
 			randExtra: Math.floor(Math.random() * 100),
 		});
 	}
@@ -26,22 +28,27 @@ async function createDummyDocuments(collection) {
 
 const PORT = process.env.PORT || 8080;
 
+const mongoClient = new MongoClient(process.env.DB_URI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+});
+let db, collection;
+
 app.get('/api', (req, res) => {
-	res.send(productarray);
+	collection.find().toArray(function(err, fetchedData) {
+		if(err) throw err;
+		// console.log(fetchedData);
+		res.json({ 'fetchedData': fetchedData });
+	});
 });
 
 app.listen(PORT, () => {
-	const mongoClient = new MongoClient(process.env.DB_URI, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	});
-
 	mongoClient.connect();
 
-	const db = mongoClient.db('ecommerce-site');
-	const collection = db.collection('dummy-products');
+	db = mongoClient.db('ecommerce-site');
+	collection = db.collection('dummy-products');
 
 	console.log(`Express.js on ${PORT}`);
 
-	createDummyDocuments(collection);
+	// createDummyDocuments(collection);
 });
