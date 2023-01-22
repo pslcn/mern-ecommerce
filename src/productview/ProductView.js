@@ -2,7 +2,7 @@ import React, { useState, } from 'react';
 
 import Product from './Product'
 
-const ProductView = ({ productData }) => {
+const ProductView = ({ productData, maxNumShow }) => {
 	const [loadedData, setLoadedData] = useState(['Loading']);
 	
 	productData.then((productData) => {
@@ -19,7 +19,7 @@ const ProductView = ({ productData }) => {
 						) : (	
 							loadedData.length > 0
 								? (
-									loadedData.map((product) => (<Product key={ product.productid } props={ product } />)) 
+									loadedData.slice(0, maxNumShow).map((product) => (<Product key={ product.productid } props={ product } />)) 
 								) : (
 									<h2>No products matched the query</h2>
 								)

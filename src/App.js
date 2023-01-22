@@ -27,7 +27,7 @@ const SearchResultsPage = () => {
 
 	return (
 		<>
-			<ProductView productData={ searchResults } />
+			<ProductView productData={ searchResults } maxNumShow={6} />
 		</>
 	)
 }
