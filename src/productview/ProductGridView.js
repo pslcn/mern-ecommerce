@@ -3,9 +3,13 @@ import React, { useState, } from 'react';
 import Product from './Product';
 
 import './ProductView.css';
+import './ProductGridView.css';
 
 const ProductGridView = ({ productData }) => {
 	const [loadedData, setLoadedData] = useState(['loading']);
+
+	const numCols = 3;
+	const numRows = 3;
 
 	productData.then((productData) => {
 		setLoadedData(productData);
@@ -20,9 +24,13 @@ const ProductGridView = ({ productData }) => {
 					) : (
 						loadedData.length > 0
 							? (
-								loadedData.slice(0, 6).map((product) => ( 
-									<Product key={ product.productid } props={ product } />
-								))
+								<div className='grid-container'>
+									{loadedData.slice(0, numCols * numRows).map((product) => (
+										<div className='grid-item'>
+											<Product key={ product.productid } props={ product } />
+										</div>
+									))}
+								</div>
 							) : (
 								<h2>No products were loaded...</h2>
 							)
