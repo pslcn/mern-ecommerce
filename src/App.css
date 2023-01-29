@@ -1,4 +1,30 @@
 * {
 	margin: 0;
 	padding: 0;
+	text-decoration: none;
+	font-family: sans-serif;
+}
+
+.container {
+	padding: 5px;
+}
+
+.flex-generic-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.flex-item-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.content-container {
+	background-color: #f3f3f3;
+}
+
+.content-section {
+	width: 90%;
+	margin: auto;
 }

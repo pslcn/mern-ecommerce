@@ -37,6 +37,10 @@ const HomePage = () => {
 	return (
 		<>
 			<Navbar />
+			<div className='content-container container'>
+				<section className='content-section'>
+				</section>
+			</div>
 		</>
 	)
 }
