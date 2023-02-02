@@ -27,7 +27,7 @@ const ProductGridView = ({ productData }) => {
 								<div className='grid-container'>
 									{loadedData.slice(0, numCols * numRows).map((product) => (
 										<div className='grid-item'>
-											<Product key={ product.productid } props={ product } />
+											<Product key={ product.item.productid } props={ product.item } />
 										</div>
 									))}
 								</div>

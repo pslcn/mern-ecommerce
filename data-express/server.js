@@ -5,6 +5,8 @@ const cors = require('cors');
 
 const { MongoClient } = require('mongodb');
 
+const Fuse = require('fuse.js')
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -34,11 +36,17 @@ const mongoClient = new MongoClient(process.env.DB_URI, {
 });
 let db, collection;
 
+const fuseSearchOptions = {
+	isCaseSensitive: false,
+	keys: ['name', 'desc']
+};
+
 app.get('/api', (req, res) => {
 	collection.find().toArray(function(err, fetchedData) {
 		if(err) throw err;
-		// console.log(fetchedData);
-		res.json({ 'fetchedData': fetchedData });
+		const fuse = new Fuse(fetchedData, fuseSearchOptions);
+		let result = fuse.search(' ')
+		res.json({ 'fetchedData': result });
 	});
 });
 

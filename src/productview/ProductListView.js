@@ -21,7 +21,7 @@ const ProductListView = ({ productData, maxNumShow }) => {
 						loadedData.length > 0
 							? (
 								loadedData.slice(0, maxNumShow).map((product) => (
-									<Product key={ product.productid } props={ product } />
+									<Product key={ product.item.productid } props={ product.item } />
 								)) 
 							) : (
 								<h2>No products matched the query</h2>
