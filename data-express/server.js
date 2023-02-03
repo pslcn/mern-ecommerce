@@ -44,8 +44,12 @@ const fuseSearchOptions = {
 app.get('/api', (req, res) => {
 	collection.find().toArray(function(err, fetchedData) {
 		if(err) throw err;
+
 		const fuse = new Fuse(fetchedData, fuseSearchOptions);
-		let result = fuse.search(' ')
+		const searchQuery = req.query['searchQuery'];
+		
+		const result = (Object.keys(req.query).length === 0) ? fuse.search(' ') : fuse.search(searchQuery);
+
 		res.json({ 'fetchedData': result });
 	});
 });

@@ -7,12 +7,15 @@ import ProductGridView from './productview/ProductGridView';
 
 import './App.css';
 
-const getSearchResults = async (searchQuery) => {
+const getSearchResults = async (searchQuery=false) => {
 		const API_URL = 'http://localhost:8080/api';
 
-		console.log('Search Query: ' + searchQuery);
-		// const response = await fetch(`${API_URL}&s=${searchQuery}`);
-		const response = await fetch(`${API_URL}`);
+		let response;
+		if (!searchQuery) {
+			response = await fetch(`${API_URL}`);
+		} else {
+			response = await fetch(`${API_URL}?searchQuery=${searchQuery}`);
+		}
 		const data = await response.json();
 
 		return data.fetchedData
@@ -39,8 +42,7 @@ const SearchResultsPage = () => {
 }
 
 const HomePage = () => {
-	const genericQuery = ''; // Get all products for homepage
-	const searchResults = getSearchResults(genericQuery);
+	const searchResults = getSearchResults();
 
 	return (
 		<>
