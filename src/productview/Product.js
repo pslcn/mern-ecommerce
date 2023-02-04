@@ -1,8 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
 
-const Product = ({ props }) => {
-	const [quantity, setQuantity] = useState(0);
+const Product = ({ props, onBasketChange }) => {
 	const descmaxlen = 80;
 
 	return (
@@ -25,8 +23,11 @@ const Product = ({ props }) => {
 
 					<div className='container'>
 						<p>{ props.price }</p>
-						<button onClick={ () => { alert('Item added to cart'); setQuantity((prevCount) => prevCount + 1) } }>Add to cart</button>
-						<p>Quantity: { quantity }</p>
+						<button onClick={ () => { 
+							alert('Item added to cart'); 
+							onBasketChange(props); 
+						} }>Add to cart</button>
+						<p>Quantity: { props.quantity }</p>
 					</div>
 				</div>
 			</article>

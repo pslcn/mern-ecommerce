@@ -5,7 +5,7 @@ import Product from './Product';
 import './ProductView.css';
 import './ProductGridView.css';
 
-const ProductGridView = ({ productData }) => {
+const ProductGridView = ({ productData, onBasketChange }) => {
 	const [loadedData, setLoadedData] = useState(['loading']);
 
 	const numCols = 3;
@@ -27,7 +27,7 @@ const ProductGridView = ({ productData }) => {
 								<div className='grid-container'>
 									{loadedData.slice(0, numCols * numRows).map((product) => (
 										<div className='grid-item'>
-											<Product key={ product.item.productid } props={ product.item } />
+											<Product key={ product.item.productid } props={ product.item } onBasketChange={ onBasketChange } />
 										</div>
 									))}
 								</div>

@@ -21,20 +21,32 @@ const getSearchResults = async (searchQuery=false) => {
 		return data.fetchedData
 }
 
+let basket = [];
+function handleBasketChange (props) {
+	for (let p = 0; p < basket.length; p++) {
+		if (basket[p].item.productid === props.productid) {
+			basket[p].item.quantity += 1;
+			return;
+		}
+	}
+
+	props.quantity = 1;
+	basket.push({ item: props, });
+}
+
 const SearchResultsPage = () => {
 	const { search } = useLocation();
 	const parameters = new URLSearchParams(search);
 
 	const searchQuery = parameters.get('search_query');
 	const searchResults = getSearchResults(searchQuery);
-	// searchResults.then((test) => (console.log('searchResults: ' + test[0].name)));
 
 	return (
 		<>
 			<Navbar />
 			<div className='content-container container'>
 				<section className='content-section'>
-					<ProductListView productData={ searchResults } maxNumShow={6} />
+					<ProductListView productData={ searchResults } maxNumShow={ 6 } onBasketChange={ handleBasketChange } />
 				</section>
 			</div>
 		</>
@@ -49,7 +61,20 @@ const HomePage = () => {
 			<Navbar />
 			<div className='content-container container'>
 				<section className='content-section'>
-					<ProductGridView productData={ searchResults } />
+					<ProductGridView productData={ searchResults } onBasketChange={ handleBasketChange } />
+				</section>
+			</div>
+		</>
+	)
+}
+
+const CheckoutPage = () => {
+	return (
+		<>
+			<Navbar />
+			<div className='content-container container'>
+				<section className='content-section'>
+					<ProductListView productData={ Promise.resolve(basket) } onBasketChange={ handleBasketChange } />
 				</section>
 			</div>
 		</>
@@ -64,6 +89,10 @@ const router = createBrowserRouter([
 	{
 		path: '/results',
 		element: (<SearchResultsPage />),
+	},
+	{
+		path: '/cart',
+		element: (<CheckoutPage />),
 	},
 ]);
 

@@ -4,11 +4,12 @@ import Product from './Product';
 
 import './ProductView.css';
 
-const ProductListView = ({ productData, maxNumShow }) => {
+const ProductListView = ({ productData, maxNumShow, onBasketChange }) => {
 	const [loadedData, setLoadedData] = useState(['Loading']);
 	
 	productData.then((productData) => {
 		setLoadedData(productData);
+		console.log(productData);
 	});
 
 	return (
@@ -21,7 +22,7 @@ const ProductListView = ({ productData, maxNumShow }) => {
 						loadedData.length > 0
 							? (
 								loadedData.slice(0, maxNumShow).map((product) => (
-									<Product key={ product.item.productid } props={ product.item } />
+									<Product key={ product.item.productid } props={ product.item } onBasketChange={ onBasketChange } />
 								)) 
 							) : (
 								<h2>No products matched the query</h2>
